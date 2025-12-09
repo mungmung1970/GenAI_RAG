@@ -1,0 +1,32 @@
+prompts:
+  - name: rag_qa
+    version: 1.0.0
+    model: gpt-4o-mini
+    description: RAG 기반 질문 응답 프롬프트
+    template: |
+      아래에 주어진 맥락을 이용해 질문에 대해 답변해 줘.
+      주어진 맥락으로 답변이 어려운 상황이라면, 그냥 모른다고 답하면 되고 억지로 답변을 꾸며 내지 마.
+      최대한 자세하게 답변해 줘.
+      반드시 한국어로 답변해야 해.
+
+      맥락:
+      {context}
+
+      질문:
+      {question}
+
+  - name: intent_classification
+    version: 1.1.0
+    model: gpt-4o-mini
+    description: 사용자 메시지에서 의도를 분류
+    template: |
+      아래 사용자 입력으로부터 의도를 1개만 선택하고 JSON으로 답해.
+      가능한 카테고리:
+      - 세법_질문
+      - 민원_행정
+      - 연구_기술
+      - AI_개발
+      - 기타
+
+      사용자 입력:
+      {user_input}

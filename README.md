@@ -1,3 +1,10 @@
+PS C:\WINDOWS\System32> ollama list
+NAME                ID              SIZE      MODIFIED
+llama3:instruct     365c0bd3c000    4.7 GB    4 seconds ago
+mistral:7b          6577803aa9a0    4.4 GB    27 minutes ago
+deepseek-r1:1.5b    e0979632db5a    1.1 GB    3 weeks ago
+deepseek-r1:14b     c333b7232bdb    9.0 GB    3 weeks ago
+
 # GenAI_RAG  
 ### 01. [AI] 스프린트 미션 14
 
@@ -13,6 +20,8 @@ LangChain 기반으로 RAG 시스템을 구축하고, 문서와 관련된 질문
 |데이터수집|ingest|loader.py|문서 로드 및 구조화/json저장|
 |||preprocessing.py|전처리 후 json저장|
 |||split.py|split json저장|
+
+
 
 ## 📂 사용 데이터셋
 이번 미션에서는 **국세청에서 발간한 2024년 연말정산 신고 안내 문서**를 활용합니다.  
