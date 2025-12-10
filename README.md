@@ -55,5 +55,10 @@
 |deepseek-r1:1.5b|e0979632db5a|1.1 GB|
 |deepseek-r1:14b|c333b7232bdb|9.0 GB|
 
-
-
+# 3 수행내역 및 결과
+## 3.1 데이터 로드(1loader.py)
+- PyPDFLoader, PDFPlumberLoader 두개 방식 비교
+- txt, html, json파일로 저장
+- PDFPlumberLoader의 경우 표도 같이 생성하는 방식으로 저장하였으나 대부분의 표가 인식되지 않았고, 표의 셀순서가 맞지 않게 텍스트도 저장됨
+- 따라서 최종PyPDFLoader를 사용하여json파일로 저장
+<br>**상용 솔루션 중에는 표인식 및 Markdown 또는 HTML로 저장, 그림인식 및 캡션 저장 등이 가능한 것이 있는 것으로 알고 있음**
