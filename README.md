@@ -23,3 +23,7 @@
 #2 수행환경
 - local에서 venv환경을 구성해서 수행
 - https://github.com/mungmung1970/GenAI_RAG
+
+##2.1 폴더 구조
+![image_01](images/image_01.png)
+
