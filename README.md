@@ -43,3 +43,16 @@
 ||deepseek-r1:1.5b|Local Ollama API사용(영어로 답변-속도 빠름, 한글 답변 실패)|
 ||mistral:7b|Local PC Ollama API사용(timeout - 시간 연장, MAX_CONTEXT_CHARS = 8000로제한-속도 매우 느림|
 ||llama3:8b-instruct-q4_0|Local  PC Ollama API사용-mistral과 동일 조건-속도 매우 느림, newline이 잘 되지 않아 잘못 이해할 소지가 있음|
+
+## 2.5 Local LLM모델
+- ollama list
+|NAME|ID|SIZE|MODIFIED|
+|-|-|-|
+|llama3:8b-instruct-q4_0|365c0bd3c000|4.7 GB|
+|llama3:instruct|365c0bd3c000|4.7 GB|
+|mistral:7b|6577803aa9a0|4.4 GB|
+|deepseek-r1:1.5b|e0979632db5a|1.1 GB|
+|deepseek-r1:14b|c333b7232bdb|9.0 GB|
+
+
+
