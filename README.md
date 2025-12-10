@@ -1,4 +1,4 @@
-<h1>1 과제 개요</h1>
+# 1 과제 개요
 
 - LLM이 외부 문서의 정보를 참고하여 답변할 수 있도록 RAG를 구현해 보는 미션입
 - LangChain을 이용해 RAG 시스템을 구현한 뒤, 사용된 문서와 관련된 질문을 하고 적절한 답변이 나오는지 확인
@@ -20,18 +20,27 @@
   - Hybrid searching, multi-query retrieval, contextual compression, reranking 등을 실험해 볼 수 있습니다.
 - (심화) Hugging Face 외의 LLM API 실험: 여유가 있다면, OpenAI API 등 Hugging Face가 아닌 LLM API를 사용해 RAG 시스템을 만들어 보고, 성능을 비교
 
-<h1>2 수행환경</h1>
+# 2 수행환경
 - local에서 venv환경을 구성해서 수행
 - https://github.com/mungmung1970/GenAI_RAG
 
-<h2>2.1 폴더 구조</h2>
+## 2.1 폴더 구조
 <br>
 ![image_01](images/image_01.png)
 
-<h2>2.2 주요 설치 패키지</h2>
+## 2.2 주요 설치 패키지
 - 상세설치 내역은 requirements.txt파일 참조
 
-<h2>2.3 벡터DB - Elastic Search/Kibana</h2>
+## 2.3 벡터DB - Elastic Search/Kibana
 ![image_02](images/image_02.png)
 
-
+## 2.4 실험모델
+|구분|모델|비고|
+|-|-|-|
+|임베딩|text-embedding-3-small||
+||bge-m3|다국어 처리가 우수하다고 하나 속도가 느림|
+|Reranker|gpt-4o-mini||
+|답변생성LLM|gpt-4o-mini|openAI API사용|
+||deepseek-r1:1.5b|Local Ollama API사용(영어로 답변-속도 빠름, 한글 답변 실패)|
+||mistral:7b|Local PC Ollama API사용(timeout - 시간 연장, MAX_CONTEXT_CHARS = 8000로제한-속도 매우 느림|
+||llama3:8b-instruct-q4_0|Local  PC Ollama API사용-mistral과 동일 조건-속도 매우 느림, newline이 잘 되지 않아 잘못 이해할 소지가 있음|
