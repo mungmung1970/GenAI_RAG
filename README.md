@@ -20,15 +20,18 @@
   - Hybrid searching, multi-query retrieval, contextual compression, reranking 등을 실험해 볼 수 있습니다.
 - (심화) Hugging Face 외의 LLM API 실험: 여유가 있다면, OpenAI API 등 Hugging Face가 아닌 LLM API를 사용해 RAG 시스템을 만들어 보고, 성능을 비교
 
-#2 수행환경
+<h1>2 수행환경</h1>
 - local에서 venv환경을 구성해서 수행
 - https://github.com/mungmung1970/GenAI_RAG
 
-##2.1 폴더 구조
+<h2>2.1 폴더 구조</h2>
 <br>
 ![image_01](images/image_01.png)
 
-##2.2 주요 설치 패키지
+<h2>2.2 주요 설치 패키지</h2>
 - 상세설치 내역은 requirements.txt파일 참조
-  
+
+<h2>2.3 벡터DB - Elastic Search/Kibana</h2>
+![image_02](images/image_02.png)
+
 
