@@ -65,3 +65,18 @@
 
 - 원본
 ![image_03](images/image_03.png)
+
+- pypdfloader.txt
+![image_04](images/image_04.png)
+
+- pypdfloader.json
+![image_05](images/image_05.png)
+
+- pypdfloader.html
+![image_06](images/image_06.png)
+
+- pdfplumber.txt - 표 cell순서가 원본과 상이함
+![image_07](images/image_07.png)
+
+- content_with_tables.html - 표를 정확하게 인식하지 못함
+![image_08](images/image_08.png)
