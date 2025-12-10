@@ -1,133 +1,21 @@
-PS C:\WINDOWS\System32> ollama list
-NAME                ID              SIZE      MODIFIED
-llama3:instruct     365c0bd3c000    4.7 GB    4 seconds ago
-mistral:7b          6577803aa9a0    4.4 GB    27 minutes ago
-deepseek-r1:1.5b    e0979632db5a    1.1 GB    3 weeks ago
-deepseek-r1:14b     c333b7232bdb    9.0 GB    3 weeks ago
+#1 미션 개요
 
-# GenAI_RAG  
-### 01. [AI] 스프린트 미션 14
+- LLM이 외부 문서의 정보를 참고하여 답변할 수 있도록 RAG를 구현해 보는 미션입
+- LangChain을 이용해 RAG 시스템을 구현한 뒤, 사용된 문서와 관련된 질문을 하고 적절한 답변이 나오는지 확인
 
----
+- 사용 데이터셋
+  - 국세청에서 발간한 2024년 연말정산 신고 안내 문서를 활용
+  - 연말정산 절차, 각종 공제 항목, 유의사항은 물론이고 2024년 기준으로 개정된 세법에 대한 정보도 있어서 RAG 시스템을 구현하고 검증하는 데 적합한 문서임
 
-## 📌 미션 소개
-LLM이 외부 문서의 정보를 참고하여 답변할 수 있도록 **RAG(Retrieval-Augmented Generation)** 를 구현하는 미션입니다.  
-LangChain 기반으로 RAG 시스템을 구축하고, 문서와 관련된 질문을 입력하여 RAG가 적절한 답변을 생성하는지 확인합니다.
+- 가이드라인
+|구분|내용|
+|-|-|
+|문서 로드 및 청킹(Chunking)|- 먼저 사용할 문서를 불러오고, 검색 효율을 높이기 위해 문서를 적절한 길이로 나누는 청킹 작업을 수행<br>-다양한 청킹 옵션으로 실험을 반복하면서 최적의 옵션 탐색(필요한 경우 단순히 문자 수로 문서를 나누지 않고, 문서의 구조나 의미 고려 필요)|
+|임베딩 생성 및 벡터 데이터베이스에 저장|-각 청크마다 임베딩을 생성하고, 이를 검색할 수 있도록 벡터 데이터베이스에 저장<br>-Hugging Face에서 어떤 모델을 사용하는지에 따라 검색 성능이 크게 달라질 수 있음<br>-특히 한국어 문서를 사용할 경우에는 모델 선정에 언어까지 고려해야 해요.벡터 데이터베이스의 종류도 다양<br>-구현의 편의성이나 검색 성능을 종합적으로 고려해 선택|
+|언어 모델 및 토크나이저 설정|-Hugging Face에서 어떤 모델을 사용하면 좋을지 결정<br>-특히 한국어로 질문하고 응답받고 싶을 경우에는 언어도 고려하여 모델을 선정<br>-필요한 경우 양자화를 통해 메모리 부하를 줄이고 응답 속도 향상<br>-Temperature, penalty 등 텍스트 생성과 관련된 다양한 옵션을 적절한 값으로 설정|
+|RAG 구현|-사용자의 질문이 들어왔을 때, 연관된 문서 청크를 찾아 맥락으로 활용해 답변을 생성하는 RAG 시스템을 구현|
+|다양한 질문 입력 및 성능 평가|-RAG 시스템에 여러 질문을 던져 보면서 적절한 답변이 나오는지 평가<br>-질문은 문서 내용에 기반하여 답변의 정확성을 검증할 수 있는 질문이어야 좋음<br>-예를 들어 연말 정산 문서로 RAG 시스템을 구현했을 경우, 다음과 같은 질문을 해 볼 수 있음<br>&nbsp;&nbsp;&nbsp;&nbsp;-연말 정산 때 비거주자가 주의할 점을 알려 줘.<br>&nbsp;&nbsp;&nbsp;&nbsp;-2024년 개정 세법 중에 월세와 관련한 내용이 있을까?|
 
-## 📂 실제 작업 순서
-|구분|프로그램ID|하위프로그램ID|설명|
-|-|-|-|-|
-|데이터수집|ingest|loader.py|문서 로드 및 구조화/json저장|
-|||preprocessing.py|전처리 후 json저장|
-|||split.py|split json저장|
-
-
-
-## 📂 사용 데이터셋
-이번 미션에서는 **국세청에서 발간한 2024년 연말정산 신고 안내 문서**를 활용합니다.  
-해당 문서는:
-
-- 연말정산 절차
-- 공제 항목
-- 유의 사항
-- 2024년 개정 세법 내용
-
-등을 다루고 있어 RAG 실험에 적합합니다.
-
----
-
-## 🧩 가이드라인
-
-### 1️⃣ 문서 로드 및 청킹(Chunking)
-- 문서를 불러오고 검색 효율을 높이기 위해 적절한 길이로 청크 분리
-- 청킹 방식은 실험을 통해 최적화 (문자 길이 기반/구조 기반/의미 기반 가능)
-
-### 2️⃣ 임베딩 생성 및 벡터 데이터베이스 구축
-- 각 문서 청크에 대한 임베딩 생성
-- 벡터 DB에 저장하여 검색 성능 확보
-- 한국어 문서 특성에 맞는 임베딩 모델 선택 중요
-
-### 3️⃣ 언어 모델 및 토크나이저 설정
-- Hugging Face 또는 OpenAI 모델 선택
-- 한국어 질의·응답 고려
-- 필요한 경우 양자화(quantization)로 메모리 및 속도 최적화
-- Temperature, penalty 등 LLM 생성 옵션 실험
-
-### 4️⃣ RAG 구현
-- 사용자의 질문 입력 → 관련 문서 검색 → 문서 기반 답변 생성
-
-### 5️⃣ 다양한 질문으로 성능 평가
-예시 질문:
-- `연말 정산 때 비거주자가 주의할 점을 알려 줘.`
-- `2024년 개정 세법 중에 월세와 관련한 내용이 있을까?`
-
-### (선택) 🔥 고급 기법 실험
-- Hybrid searching
-- Multi-query retrieval
-- Contextual compression
-- Reranking
-
-### (선택) 🔥 Hugging Face 외 LLM API 실험
-- OpenAI / Claude 등과 비교 실험
-
----
-
-## 📤 제출 안내
-- **Colab Notebook 파일 제출**
-- 파일명 형식: `14_{팀명}_{성함}.ipynb`
-
-### 제출 시 포함해야 할 내용
-- LangChain 기반 RAG 구현 및 응답 결과
-- 마크다운 설명 (코드 의도 / 옵션 선정 이유 / 결과 분석)
-- 다양한 질문 기반 성능 평가
-
----
-
-## 📦 참고
-- Baseline 코드 제공 (그대로 사용하지 말고 자신의 아이디어로 확장 권장)
-- 국세청 연말정산 종합 안내 페이지에서 원본 데이터 다운로드 가능
-
----
-
-## 🔥 RAG 프로젝트 표준 폴더 구조 (권장)
-src/
-├── config.py
-│
-├── llm/                        # LLM 관련 클래스 / provider
-│   ├── __init__.py
-│   ├── openai_llm.py
-│   ├── huggingface_llm.py
-│   └── base_llm.py
-│
-├── embeddings/                # (추가 권장) 임베딩 모델 분리
-│   ├── __init__.py
-│   └── openai_embedder.py
-│
-├── retriever/
-│   ├── __init__.py
-│   ├── chroma_retriever.py
-│   └── base_retriever.py
-│
-├── rag/
-│   ├── __init__.py
-│   ├── rag_chain.py
-│   ├── prompt.py              # 파일명 오타 수정 (promtp → prompt)
-│   └── ingest.py              # ingest 역할 분리
-│
-├── tools/
-│   ├── __init__.py
-│   ├── bing_tool.py           (예시)
-│   ├── search_tool.py         (예시)
-│   └── calc_tool.py
-│
-├── utils/
-│   ├── __init__.py
-│   ├── logger.py
-│   ├── text_split.py
-│   ├── loader.py
-│   └── file.py                (여기 추가 권장)
-│
-└── api/                       # 애플리케이션 엔드포인트/서비스
-    ├── __init__.py
-    ├── rest_api.py            # FastAPI / Flask / Gradio 어떤 것이든
-    └── service.py             # API 요청 → RAG 호출 라우팅
+- (심화) 고급 RAG 기법 실험: 기본 RAG 구현을 완료했다면, 더 나아가 다양한 고급 기법들을 구현해 보고 성능이 나아지는지 확인
+  - Hybrid searching, multi-query retrieval, contextual compression, reranking 등을 실험해 볼 수 있습니다.
+(심화) Hugging Face 외의 LLM API 실험: 여유가 있다면, OpenAI API 등 Hugging Face가 아닌 LLM API를 사용해 RAG 시스템을 만들어 보고, 성능을 비교
