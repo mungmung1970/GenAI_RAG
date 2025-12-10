@@ -47,7 +47,7 @@
 ## 2.5 Local LLM모델
 - ollama list
   
-|NAME|ID|SIZE|MODIFIED|
+|NAME|ID|SIZE|
 |-|-|-|
 |llama3:8b-instruct-q4_0|365c0bd3c000|4.7 GB|
 |llama3:instruct|365c0bd3c000|4.7 GB|
