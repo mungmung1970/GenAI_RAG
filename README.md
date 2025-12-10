@@ -25,5 +25,10 @@
 - https://github.com/mungmung1970/GenAI_RAG
 
 ##2.1 폴더 구조
+<br>
 ![image_01](images/image_01.png)
+
+##2.2 주요 설치 패키지
+- 상세설치 내역은 requirements.txt파일 참조
+  
 
